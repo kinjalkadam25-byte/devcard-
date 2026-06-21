@@ -482,36 +482,69 @@
     </div>
   </footer>
 
-  <!-- ContainerScroll JS -->
+  <!-- ContainerScroll JS — RAF + lerp for smooth 60fps animation -->
   <script>
     (function () {
       const section = document.getElementById('scroll-section')
       const header  = document.getElementById('scroll-header')
       const card    = document.getElementById('scroll-card')
-      const isMobile = () => window.innerWidth <= 768
 
-      function lerp(a, b, t) { return a + (b - a) * t }
-      function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)) }
+      const isMobile   = () => window.innerWidth <= 768
+      const lerp        = (a, b, t) => a + (b - a) * t
+      const clamp       = (v, lo, hi) => Math.max(lo, Math.min(hi, v))
+      const easeOutCubic = t => 1 - Math.pow(1 - t, 3)
 
-      function tick() {
+      // current (displayed) values
+      let rotateC = 20, scaleC = 1.05, transC = 0
+      // target values (from scroll position)
+      let rotateT = 20, scaleT  = 1.05, transT = 0
+      let rafRunning = false
+
+      function computeTargets() {
         const rect = section.getBoundingClientRect()
-        const sectionH = rect.height
-        const vpH = window.innerHeight
-
-        // progress: 0 when section top enters viewport, 1 when section bottom leaves
-        const progress = clamp((-rect.top) / (sectionH - vpH), 0, 1)
-
-        const rotate    = lerp(isMobile() ? 14 : 20, 0, progress)
-        const scale     = lerp(isMobile() ? 0.92 : 1.05, 1, progress)
-        const translateY = lerp(0, -100, progress)
-
-        header.style.transform = `translateY(${translateY}px)`
-        card.style.transform   = `rotateX(${rotate}deg) scale(${scale})`
+        const p    = clamp(-rect.top / (rect.height - window.innerHeight), 0, 1)
+        const e    = easeOutCubic(p)
+        const maxR = isMobile() ? 14 : 20
+        const minS = isMobile() ? 0.92 : 1.05
+        rotateT = lerp(maxR, 0, e)
+        scaleT  = lerp(minS, 1, e)
+        transT  = lerp(0, -100, e)
       }
 
-      window.addEventListener('scroll', tick, { passive: true })
-      window.addEventListener('resize', tick, { passive: true })
-      tick()
+      function frame() {
+        computeTargets()
+
+        // Smooth-follow: lerp current toward target each frame
+        const f = 0.1          // 0 = instant, 0.05 = very laggy, 0.12 = snappy
+        rotateC = lerp(rotateC, rotateT, f)
+        scaleC  = lerp(scaleC,  scaleT,  f)
+        transC  = lerp(transC,  transT,  f)
+
+        header.style.transform = `translateY(${transC}px)`
+        card.style.transform   = `rotateX(${rotateC}deg) scale(${scaleC})`
+
+        // Stop RAF once values have settled to save CPU
+        const settled =
+          Math.abs(rotateC - rotateT) < 0.005  &&
+          Math.abs(scaleC  - scaleT)  < 0.0001 &&
+          Math.abs(transC  - transT)  < 0.05
+
+        if (settled) {
+          header.style.transform = `translateY(${transT}px)`
+          card.style.transform   = `rotateX(${rotateT}deg) scale(${scaleT})`
+          rafRunning = false
+        } else {
+          requestAnimationFrame(frame)
+        }
+      }
+
+      function kick() {
+        if (!rafRunning) { rafRunning = true; requestAnimationFrame(frame) }
+      }
+
+      window.addEventListener('scroll', kick, { passive: true })
+      window.addEventListener('resize', kick, { passive: true })
+      kick()
     })()
   </script>
 
