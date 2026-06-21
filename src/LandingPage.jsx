@@ -1,5 +1,25 @@
 import { ContainerScroll } from "@/components/ui/container-scroll-animation"
 import { useNavigate } from "react-router-dom"
+import { motion } from "framer-motion"
+
+// Reusable scroll-triggered fade-up
+const fadeUp = { hidden: { opacity: 0, y: 28 }, visible: { opacity: 1, y: 0 } }
+const vp = { once: true, margin: "-80px" }
+
+function FadeUp({ children, delay = 0, className = "" }) {
+  return (
+    <motion.div
+      className={className}
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={vp}
+      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1], delay }}
+    >
+      {children}
+    </motion.div>
+  )
+}
 
 // ─── Kanban mockup rendered inside ContainerScroll ───────────────────────────
 
@@ -136,18 +156,20 @@ function Features() {
 
   return (
     <section id="features" className="max-w-6xl mx-auto px-6 py-24">
-      <div className="text-center mb-16">
+      <FadeUp className="text-center mb-16">
         <p className="text-sm font-semibold text-indigo-600 uppercase tracking-widest mb-3">Everything you need</p>
         <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">Built for how teams<br/>actually work</h2>
         <p className="text-slate-500 text-lg max-w-xl mx-auto">No more switching between five tools. Flowly keeps planning, code, and conversations in one place.</p>
-      </div>
+      </FadeUp>
       <div className="grid md:grid-cols-3 gap-5">
-        {items.map(({ icon, color, title, desc }) => (
-          <div key={title} className="bg-white border-2 border-slate-100 hover:border-indigo-300 rounded-2xl p-6 transition-colors duration-200 cursor-default">
-            <div className={`w-10 h-10 rounded-xl ${color} flex items-center justify-center text-xl mb-4`}>{icon}</div>
-            <h3 className="font-semibold text-slate-900 text-base mb-2">{title}</h3>
-            <p className="text-slate-500 text-sm leading-relaxed">{desc}</p>
-          </div>
+        {items.map(({ icon, color, title, desc }, i) => (
+          <FadeUp key={title} delay={i * 0.07}>
+            <div className="h-full bg-white border-2 border-slate-100 hover:border-indigo-300 rounded-2xl p-6 transition-colors duration-200 cursor-default">
+              <div className={`w-10 h-10 rounded-xl ${color} flex items-center justify-center text-xl mb-4`}>{icon}</div>
+              <h3 className="font-semibold text-slate-900 text-base mb-2">{title}</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">{desc}</p>
+            </div>
+          </FadeUp>
         ))}
       </div>
     </section>
@@ -164,17 +186,17 @@ function HowItWorks() {
   return (
     <section id="how-it-works" className="bg-white border-y border-slate-100 py-24">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16">
+        <FadeUp className="text-center mb-16">
           <p className="text-sm font-semibold text-indigo-600 uppercase tracking-widest mb-3">Simple by design</p>
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight">Up and running<br/>in 3 minutes</h2>
-        </div>
+        </FadeUp>
         <div className="grid md:grid-cols-3 gap-10">
-          {steps.map(({ n, color, title, desc }) => (
-            <div key={n} className="text-center">
+          {steps.map(({ n, color, title, desc }, i) => (
+            <FadeUp key={n} delay={i * 0.1} className="text-center">
               <div className={`w-12 h-12 rounded-2xl ${color} flex items-center justify-center text-white font-bold text-xl mx-auto mb-5`}>{n}</div>
               <h3 className="font-semibold text-slate-900 text-lg mb-2">{title}</h3>
               <p className="text-slate-500 text-sm leading-relaxed">{desc}</p>
-            </div>
+            </FadeUp>
           ))}
         </div>
       </div>
@@ -187,11 +209,11 @@ function Stats() {
   return (
     <section className="max-w-6xl mx-auto px-6 py-20">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-        {data.map(([n, l]) => (
-          <div key={l} className="text-center">
+        {data.map(([n, l], i) => (
+          <FadeUp key={l} delay={i * 0.08} className="text-center">
             <p className="text-4xl font-bold text-indigo-600 mb-1">{n}</p>
             <p className="text-slate-500 text-sm">{l}</p>
-          </div>
+          </FadeUp>
         ))}
       </div>
     </section>
@@ -223,14 +245,15 @@ function Pricing({ onGetStarted }) {
   return (
     <section id="pricing" className="bg-white border-y border-slate-100 py-24">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16">
+        <FadeUp className="text-center mb-16">
           <p className="text-sm font-semibold text-indigo-600 uppercase tracking-widest mb-3">Pricing</p>
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-3 tracking-tight">Simple, transparent pricing</h2>
           <p className="text-slate-500">No surprise fees. Cancel anytime.</p>
-        </div>
+        </FadeUp>
         <div className="grid md:grid-cols-3 gap-5 max-w-4xl mx-auto">
-          {plans.map(({ name, price, unit, desc, cta, ctaStyle, features, highlight }) => (
-            <div key={name} className={`rounded-2xl p-7 relative transition-transform duration-200 hover:-translate-y-1 ${highlight ? "bg-indigo-600 border-2 border-indigo-600" : "bg-[#F8F7FF] border-2 border-slate-100"}`}>
+          {plans.map(({ name, price, unit, desc, cta, ctaStyle, features, highlight }, i) => (
+            <FadeUp key={name} delay={i * 0.08}>
+            <div className={`rounded-2xl p-7 relative transition-transform duration-200 hover:-translate-y-1 ${highlight ? "bg-indigo-600 border-2 border-indigo-600" : "bg-[#F8F7FF] border-2 border-slate-100"}`}>
               {highlight && <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-emerald-500 text-white text-xs font-semibold px-3 py-1 rounded-full">Most popular</div>}
               <p className={`text-xs font-semibold uppercase tracking-widest mb-1 ${highlight ? "text-indigo-200" : "text-slate-500"}`}>{name}</p>
               <div className="flex items-end gap-1 mb-1">
@@ -248,6 +271,7 @@ function Pricing({ onGetStarted }) {
                 ))}
               </ul>
             </div>
+            </FadeUp>
           ))}
         </div>
       </div>
@@ -258,12 +282,14 @@ function Pricing({ onGetStarted }) {
 function FinalCTA({ onGetStarted }) {
   return (
     <section className="max-w-3xl mx-auto px-6 py-24 text-center">
-      <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">Ready to ship faster?</h2>
-      <p className="text-slate-500 text-lg mb-10">Join 4,000+ teams that run their entire engineering workflow in Flowly.</p>
-      <button onClick={onGetStarted} className="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-8 py-4 rounded-xl text-base transition-colors duration-150 inline-flex items-center gap-2 cursor-pointer">
-        Get started — it's free
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-      </button>
+      <FadeUp>
+        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">Ready to ship faster?</h2>
+        <p className="text-slate-500 text-lg mb-10">Join 4,000+ teams that run their entire engineering workflow in Flowly.</p>
+        <button onClick={onGetStarted} className="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-8 py-4 rounded-xl text-base transition-colors duration-150 inline-flex items-center gap-2 cursor-pointer">
+          Get started — it's free
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+        </button>
+      </FadeUp>
     </section>
   )
 }
@@ -356,12 +382,23 @@ export default function LandingPage() {
         {/* Social proof */}
         <section className="border-y border-slate-100 bg-white py-10">
           <div className="max-w-5xl mx-auto px-6 text-center">
-            <p className="text-xs font-medium text-slate-400 uppercase tracking-widest mb-7">Trusted by teams at</p>
-            <div className="flex flex-wrap items-center justify-center gap-10">
-              {["Linear","Vercel","Raycast","Loom","Arc","Pitch"].map(name => (
-                <span key={name} className="text-xl font-bold text-slate-300">{name}</span>
-              ))}
-            </div>
+            <FadeUp>
+              <p className="text-xs font-medium text-slate-400 uppercase tracking-widest mb-7">Trusted by teams at</p>
+              <div className="flex flex-wrap items-center justify-center gap-10">
+                {["Linear","Vercel","Raycast","Loom","Arc","Pitch"].map((name, i) => (
+                  <motion.span
+                    key={name}
+                    className="text-xl font-bold text-slate-300"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={vp}
+                    transition={{ duration: 0.4, delay: i * 0.06 }}
+                  >
+                    {name}
+                  </motion.span>
+                ))}
+              </div>
+            </FadeUp>
           </div>
         </section>
 
