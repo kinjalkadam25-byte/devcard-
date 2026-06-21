@@ -1,8 +1,19 @@
 import { useState, useEffect, useRef } from "react"
 import { supabase } from "./supabase"
-import { BrowserRouter, Routes, Route, useParams, useNavigate } from "react-router-dom"
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
+import { BrowserRouter, Routes, Route, useParams, useNavigate, useLocation } from "react-router-dom"
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion"
 import LandingPage from "./LandingPage"
+
+// Shared page transition — fade up in, fade up out
+const tx = {
+  initial: { opacity: 0, y: 18 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.28, ease: [0.25, 0.1, 0.25, 1] } },
+  exit:    { opacity: 0, y: -10, transition: { duration: 0.18, ease: [0.4, 0, 1, 0.6] } },
+}
+
+function Page({ children }) {
+  return <motion.div {...tx}>{children}</motion.div>
+}
 
 // ─── helpers ────────────────────────────────────────────────────────────────
 
@@ -816,15 +827,49 @@ function Main() {
 
   const logOut = async () => { await supabase.auth.signOut(); setUser(null); setView("dashboard") }
 
-  if (!user) return <Login />
-  if (view === "new") return <CardEditor user={user} existingCard={null} onBack={() => setView("dashboard")} />
-  if (view === "edit") return <CardEditor user={user} existingCard={editingCard} onBack={() => { setEditingCard(null); setView("dashboard") }} />
+  // Key drives AnimatePresence — each distinct screen gets its own exit/enter cycle
+  const activeKey = !user ? "login" : view
 
   return (
-    <Dashboard user={user} onLogOut={logOut}
-      onNew={() => setView("new")}
-      onEdit={(card) => { setEditingCard(card); setView("edit") }}
-    />
+    <AnimatePresence mode="wait" initial={false}>
+      {!user && (
+        <Page key="login"><Login /></Page>
+      )}
+      {user && view === "new" && (
+        <Page key="new">
+          <CardEditor user={user} existingCard={null} onBack={() => setView("dashboard")} />
+        </Page>
+      )}
+      {user && view === "edit" && (
+        <Page key="edit">
+          <CardEditor user={user} existingCard={editingCard} onBack={() => { setEditingCard(null); setView("dashboard") }} />
+        </Page>
+      )}
+      {user && view === "dashboard" && (
+        <Page key="dashboard">
+          <Dashboard user={user} onLogOut={logOut}
+            onNew={() => setView("new")}
+            onEdit={(card) => { setEditingCard(card); setView("edit") }}
+          />
+        </Page>
+      )}
+    </AnimatePresence>
+  )
+}
+
+// ─── animated route switcher ──────────────────────────────────────────────────
+
+function AnimatedRoutes() {
+  const location = useLocation()
+  return (
+    <AnimatePresence mode="wait" initial={false}>
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Page><LandingPage /></Page>} />
+        <Route path="/u/:username" element={<Page><ProfilePage /></Page>} />
+        <Route path="/app/*" element={<Main />} />
+        <Route path="/*" element={<Main />} />
+      </Routes>
+    </AnimatePresence>
   )
 }
 
@@ -832,12 +877,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <style>{styles}</style>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/u/:username" element={<ProfilePage />} />
-        <Route path="/app/*" element={<Main />} />
-        <Route path="/*" element={<Main />} />
-      </Routes>
+      <AnimatedRoutes />
     </BrowserRouter>
   )
 }
