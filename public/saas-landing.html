@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flowly — Ship faster, together</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Rubik:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6366F1',
+            'primary-light': '#818CF8',
+            cta: '#10B981',
+            'cta-dark': '#059669',
+            bg: '#F5F3FF',
+            ink: '#1E1B4B',
+            muted: '#6B7280',
+            surface: '#FFFFFF',
+            border: '#E0E7FF',
+          },
+          fontFamily: {
+            heading: ['Outfit', 'sans-serif'],
+            body: ['Rubik', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body { font-family: 'Rubik', sans-serif; background-color: #F5F3FF; color: #1E1B4B; }
+    h1, h2, h3, h4, h5, .font-heading { font-family: 'Outfit', sans-serif; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; } }
+    .nav-link { transition: color 150ms ease; }
+    .btn { transition: background-color 200ms ease, transform 150ms ease, opacity 200ms ease; }
+    .btn:active { transform: scale(0.98); }
+    .feature-card { transition: border-color 200ms ease; }
+    .feature-card:hover { border-color: #6366F1; }
+    .pricing-card { transition: border-color 200ms ease, transform 200ms ease; }
+    .pricing-card:hover { transform: translateY(-4px); }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- NAV -->
+  <header class="sticky top-0 z-50 bg-white border-b border-border">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2 font-heading font-700 text-xl text-ink" aria-label="Flowly home">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <rect width="28" height="28" rx="8" fill="#6366F1"/>
+          <path d="M8 14h4l2-5 3 10 2-5h1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span style="font-family:Outfit,sans-serif;font-weight:700">Flowly</span>
+      </a>
+
+      <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-muted" role="list">
+        <li><a href="#features" class="nav-link hover:text-ink">Features</a></li>
+        <li><a href="#how-it-works" class="nav-link hover:text-ink">How it works</a></li>
+        <li><a href="#pricing" class="nav-link hover:text-ink">Pricing</a></li>
+        <li><a href="#" class="nav-link hover:text-ink">Docs</a></li>
+      </ul>
+
+      <div class="flex items-center gap-3">
+        <a href="#" class="hidden sm:inline-flex text-sm font-medium text-ink hover:text-primary transition-colors duration-150 cursor-pointer">Log in</a>
+        <a href="#" class="btn inline-flex items-center gap-2 bg-cta hover:bg-cta-dark text-white text-sm font-semibold px-4 py-2 rounded-lg cursor-pointer" style="font-family:Outfit,sans-serif">
+          Get started free
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="max-w-6xl mx-auto px-6 pt-20 pb-16 text-center">
+      <div class="inline-flex items-center gap-2 bg-white border border-border rounded-full px-4 py-1.5 text-xs font-medium text-primary mb-8" style="font-family:Outfit,sans-serif">
+        <span class="w-1.5 h-1.5 rounded-full bg-cta inline-block"></span>
+        New: AI-powered sprint planning is here
+      </div>
+
+      <h1 class="font-heading text-5xl md:text-6xl lg:text-7xl font-800 text-ink leading-tight tracking-tight mb-6" style="font-family:Outfit,sans-serif;font-weight:800">
+        Ship faster,<br />
+        <span class="text-primary">together.</span>
+      </h1>
+
+      <p class="text-lg md:text-xl text-muted font-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+        Flowly brings your team's tasks, docs, and sprints into one calm workspace — so you spend less time managing and more time building.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+        <a href="#" class="btn w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-cta hover:bg-cta-dark text-white font-semibold px-7 py-3.5 rounded-xl text-base cursor-pointer" style="font-family:Outfit,sans-serif">
+          Start for free — no credit card
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#how-it-works" class="btn w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white border border-border hover:border-primary text-ink font-medium px-7 py-3.5 rounded-xl text-base cursor-pointer">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#6366F1" stroke-width="1.5"/><path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="#6366F1"/></svg>
+          Watch 2-min demo
+        </a>
+      </div>
+
+      <!-- Product mockup -->
+      <div class="relative bg-white border-2 border-border rounded-2xl overflow-hidden max-w-4xl mx-auto" role="img" aria-label="Flowly dashboard preview">
+        <!-- Mock toolbar -->
+        <div class="flex items-center gap-2 px-4 py-3 border-b border-border bg-bg">
+          <span class="w-3 h-3 rounded-full bg-red-300"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-300"></span>
+          <span class="w-3 h-3 rounded-full bg-green-300"></span>
+          <div class="ml-4 flex-1 bg-white border border-border rounded px-3 py-1 text-xs text-muted text-left">app.flowly.io/workspace</div>
+        </div>
+        <!-- Mock dashboard layout -->
+        <div class="flex" style="height:400px">
+          <!-- Sidebar -->
+          <div class="w-52 border-r border-border bg-bg p-4 flex flex-col gap-1 shrink-0">
+            <div class="text-xs font-semibold text-muted uppercase tracking-wider mb-2 px-2" style="font-family:Outfit,sans-serif">Workspace</div>
+            <div class="flex items-center gap-2 px-2 py-1.5 rounded-lg bg-primary text-white text-sm font-medium cursor-pointer">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="1" width="5" height="5" rx="1" fill="currentColor"/><rect x="8" y="1" width="5" height="5" rx="1" fill="currentColor" opacity=".5"/><rect x="1" y="8" width="5" height="5" rx="1" fill="currentColor" opacity=".5"/><rect x="8" y="8" width="5" height="5" rx="1" fill="currentColor" opacity=".3"/></svg>
+              Dashboard
+            </div>
+            <div class="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-white text-sm text-muted cursor-pointer">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 4h10M2 7h7M2 10h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Sprints
+            </div>
+            <div class="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-white text-sm text-muted cursor-pointer">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="2" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M1 5h12" stroke="currentColor" stroke-width="1"/></svg>
+              Board
+            </div>
+            <div class="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-white text-sm text-muted cursor-pointer">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              New project
+            </div>
+            <div class="mt-auto pt-4 border-t border-border">
+              <div class="flex items-center gap-2 px-2 py-1.5">
+                <div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold">J</div>
+                <div class="text-xs text-muted">Jane Cooper</div>
+              </div>
+            </div>
+          </div>
+          <!-- Main content -->
+          <div class="flex-1 p-6 overflow-hidden">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h2 class="font-semibold text-ink text-base" style="font-family:Outfit,sans-serif">Q3 Sprint — Week 4</h2>
+                <p class="text-xs text-muted mt-0.5">14 tasks · 6 completed · 3 in review</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="flex -space-x-2">
+                  <div class="w-7 h-7 rounded-full bg-primary border-2 border-white flex items-center justify-center text-white text-xs font-bold">J</div>
+                  <div class="w-7 h-7 rounded-full bg-pink-400 border-2 border-white flex items-center justify-center text-white text-xs font-bold">M</div>
+                  <div class="w-7 h-7 rounded-full bg-amber-400 border-2 border-white flex items-center justify-center text-white text-xs font-bold">R</div>
+                </div>
+                <button class="btn text-xs font-medium bg-cta text-white px-3 py-1.5 rounded-lg cursor-pointer" style="font-family:Outfit,sans-serif">+ Add task</button>
+              </div>
+            </div>
+            <!-- Kanban columns -->
+            <div class="grid grid-cols-3 gap-3 h-64">
+              <!-- To Do -->
+              <div class="bg-bg rounded-xl p-3">
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-xs font-semibold text-muted uppercase tracking-wide" style="font-family:Outfit,sans-serif">To do</span>
+                  <span class="text-xs bg-white border border-border rounded-full px-2 py-0.5 text-muted">5</span>
+                </div>
+                <div class="space-y-2">
+                  <div class="bg-white border border-border rounded-lg p-2.5 text-xs text-ink">API rate limiting</div>
+                  <div class="bg-white border border-border rounded-lg p-2.5 text-xs text-ink">Write onboarding docs</div>
+                  <div class="bg-white border border-border rounded-lg p-2.5 text-xs text-ink">Dark mode polish</div>
+                </div>
+              </div>
+              <!-- In Progress -->
+              <div class="bg-bg rounded-xl p-3">
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-xs font-semibold text-primary uppercase tracking-wide" style="font-family:Outfit,sans-serif">In progress</span>
+                  <span class="text-xs bg-primary/10 border border-primary/20 rounded-full px-2 py-0.5 text-primary">3</span>
+                </div>
+                <div class="space-y-2">
+                  <div class="bg-white border border-primary rounded-lg p-2.5 text-xs text-ink">Auth OTP flow</div>
+                  <div class="bg-white border border-border rounded-lg p-2.5 text-xs text-ink">Dashboard redesign</div>
+                </div>
+              </div>
+              <!-- Done -->
+              <div class="bg-bg rounded-xl p-3">
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-xs font-semibold text-cta uppercase tracking-wide" style="font-family:Outfit,sans-serif">Done</span>
+                  <span class="text-xs bg-cta/10 border border-cta/20 rounded-full px-2 py-0.5 text-cta">6</span>
+                </div>
+                <div class="space-y-2">
+                  <div class="bg-white border border-border rounded-lg p-2.5 text-xs text-muted line-through">Mobile navigation</div>
+                  <div class="bg-white border border-border rounded-lg p-2.5 text-xs text-muted line-through">Invite team flow</div>
+                  <div class="bg-white border border-border rounded-lg p-2.5 text-xs text-muted line-through">CI pipeline setup</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOCIAL PROOF -->
+    <section class="border-y border-border bg-white py-10" aria-label="Trusted by leading companies">
+      <div class="max-w-5xl mx-auto px-6 text-center">
+        <p class="text-xs font-medium text-muted uppercase tracking-widest mb-8" style="font-family:Outfit,sans-serif">Trusted by 4,000+ teams worldwide</p>
+        <div class="flex flex-wrap items-center justify-center gap-10 opacity-50">
+          <span class="text-xl font-800 text-ink" style="font-family:Outfit,sans-serif">Linear</span>
+          <span class="text-xl font-800 text-ink" style="font-family:Outfit,sans-serif">Vercel</span>
+          <span class="text-xl font-800 text-ink" style="font-family:Outfit,sans-serif">Raycast</span>
+          <span class="text-xl font-800 text-ink" style="font-family:Outfit,sans-serif">Loom</span>
+          <span class="text-xl font-800 text-ink" style="font-family:Outfit,sans-serif">Arc</span>
+          <span class="text-xl font-800 text-ink" style="font-family:Outfit,sans-serif">Pitch</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="max-w-6xl mx-auto px-6 py-24">
+      <div class="text-center mb-16">
+        <p class="text-sm font-semibold text-primary uppercase tracking-widest mb-3" style="font-family:Outfit,sans-serif">Everything you need</p>
+        <h2 class="font-heading text-4xl md:text-5xl font-700 text-ink mb-4" style="font-family:Outfit,sans-serif;font-weight:700">Built for how teams<br/>actually work</h2>
+        <p class="text-muted text-lg max-w-xl mx-auto">No more switching between 5 tools. Flowly keeps planning, code, and conversations in one place.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Feature 1 -->
+        <div class="feature-card bg-white border-2 border-border rounded-2xl p-6 cursor-default">
+          <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h10M3 15h7" stroke="#6366F1" stroke-width="1.75" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="font-heading font-600 text-ink text-lg mb-2" style="font-family:Outfit,sans-serif;font-weight:600">Smart sprint planning</h3>
+          <p class="text-muted text-sm leading-relaxed">AI reads your backlog and suggests realistic sprint goals — no more overloaded weeks.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card bg-white border-2 border-border rounded-2xl p-6 cursor-default">
+          <div class="w-10 h-10 rounded-xl bg-cta/10 flex items-center justify-center mb-4" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2v6l4 2" stroke="#10B981" stroke-width="1.75" stroke-linecap="round"/><circle cx="10" cy="10" r="8" stroke="#10B981" stroke-width="1.75"/></svg>
+          </div>
+          <h3 class="font-heading font-600 text-ink text-lg mb-2" style="font-family:Outfit,sans-serif;font-weight:600">Real-time progress</h3>
+          <p class="text-muted text-sm leading-relaxed">Live velocity charts and burndown graphs update as your team moves tasks — no manual updates.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card bg-white border-2 border-border rounded-2xl p-6 cursor-default">
+          <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center mb-4" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 4h12v8H4z" stroke="#7C3AED" stroke-width="1.75" stroke-linejoin="round"/><path d="M7 16h6" stroke="#7C3AED" stroke-width="1.75" stroke-linecap="round"/><path d="M10 12v4" stroke="#7C3AED" stroke-width="1.75" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="font-heading font-600 text-ink text-lg mb-2" style="font-family:Outfit,sans-serif;font-weight:600">GitHub integration</h3>
+          <p class="text-muted text-sm leading-relaxed">PRs auto-link to tasks. Merging a branch moves the card — your board stays in sync without lifting a finger.</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card bg-white border-2 border-border rounded-2xl p-6 cursor-default">
+          <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center mb-4" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3" stroke="#D97706" stroke-width="1.75"/><path d="M3 17c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="#D97706" stroke-width="1.75" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="font-heading font-600 text-ink text-lg mb-2" style="font-family:Outfit,sans-serif;font-weight:600">Team workload view</h3>
+          <p class="text-muted text-sm leading-relaxed">See who's overloaded at a glance. Rebalance tasks with drag-and-drop before deadlines slip.</p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card bg-white border-2 border-border rounded-2xl p-6 cursor-default">
+          <div class="w-10 h-10 rounded-xl bg-rose-100 flex items-center justify-center mb-4" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M6 10h8M10 6l4 4-4 4" stroke="#E11D48" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="font-heading font-600 text-ink text-lg mb-2" style="font-family:Outfit,sans-serif;font-weight:600">Automated standups</h3>
+          <p class="text-muted text-sm leading-relaxed">Flowly compiles your daily standup from task activity — team stays aligned without the 9am meeting.</p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-card bg-white border-2 border-border rounded-2xl p-6 cursor-default">
+          <div class="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center mb-4" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="11" rx="2" stroke="#0284C7" stroke-width="1.75"/><path d="M2 8h16" stroke="#0284C7" stroke-width="1"/></svg>
+          </div>
+          <h3 class="font-heading font-600 text-ink text-lg mb-2" style="font-family:Outfit,sans-serif;font-weight:600">Works on any device</h3>
+          <p class="text-muted text-sm leading-relaxed">Fully responsive web app plus native iOS and Android apps — your team's workflow goes wherever they do.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="bg-white border-y border-border py-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <p class="text-sm font-semibold text-primary uppercase tracking-widest mb-3" style="font-family:Outfit,sans-serif">Simple by design</p>
+          <h2 class="font-heading text-4xl md:text-5xl font-700 text-ink" style="font-family:Outfit,sans-serif;font-weight:700">Up and running<br/>in 3 minutes</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div class="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white font-heading font-700 text-xl mx-auto mb-5" style="font-family:Outfit,sans-serif;font-weight:700" aria-hidden="true">1</div>
+            <h3 class="font-heading font-600 text-ink text-lg mb-2" style="font-family:Outfit,sans-serif;font-weight:600">Create your workspace</h3>
+            <p class="text-muted text-sm leading-relaxed">Sign up, name your team, and invite members via email or link. Takes 30 seconds.</p>
+          </div>
+          <div class="text-center">
+            <div class="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white font-heading font-700 text-xl mx-auto mb-5" style="font-family:Outfit,sans-serif;font-weight:700" aria-hidden="true">2</div>
+            <h3 class="font-heading font-600 text-ink text-lg mb-2" style="font-family:Outfit,sans-serif;font-weight:600">Import or start fresh</h3>
+            <p class="text-muted text-sm leading-relaxed">Import from Jira, Linear, or Notion in one click — or start a new project from scratch.</p>
+          </div>
+          <div class="text-center">
+            <div class="w-12 h-12 rounded-2xl bg-cta flex items-center justify-center text-white font-heading font-700 text-xl mx-auto mb-5" style="font-family:Outfit,sans-serif;font-weight:700" aria-hidden="true">3</div>
+            <h3 class="font-heading font-600 text-ink text-lg mb-2" style="font-family:Outfit,sans-serif;font-weight:600">Ship with your team</h3>
+            <p class="text-muted text-sm leading-relaxed">Plan your first sprint, connect GitHub, and let Flowly keep everyone aligned automatically.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="max-w-6xl mx-auto px-6 py-20" aria-label="Key metrics">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="text-center">
+          <p class="font-heading text-4xl font-800 text-primary" style="font-family:Outfit,sans-serif;font-weight:800">4k+</p>
+          <p class="text-muted text-sm mt-1">Teams shipping</p>
+        </div>
+        <div class="text-center">
+          <p class="font-heading text-4xl font-800 text-primary" style="font-family:Outfit,sans-serif;font-weight:800">2.4M</p>
+          <p class="text-muted text-sm mt-1">Tasks completed</p>
+        </div>
+        <div class="text-center">
+          <p class="font-heading text-4xl font-800 text-primary" style="font-family:Outfit,sans-serif;font-weight:800">37%</p>
+          <p class="text-muted text-sm mt-1">Faster sprints</p>
+        </div>
+        <div class="text-center">
+          <p class="font-heading text-4xl font-800 text-primary" style="font-family:Outfit,sans-serif;font-weight:800">99.9%</p>
+          <p class="text-muted text-sm mt-1">Uptime SLA</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="bg-white border-y border-border py-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <p class="text-sm font-semibold text-primary uppercase tracking-widest mb-3" style="font-family:Outfit,sans-serif">Pricing</p>
+          <h2 class="font-heading text-4xl md:text-5xl font-700 text-ink mb-4" style="font-family:Outfit,sans-serif;font-weight:700">Simple, transparent pricing</h2>
+          <p class="text-muted">No surprise fees. Cancel anytime.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <!-- Free -->
+          <div class="pricing-card border-2 border-border rounded-2xl p-7 bg-bg cursor-default">
+            <p class="font-heading font-600 text-ink text-sm uppercase tracking-wide mb-1" style="font-family:Outfit,sans-serif;font-weight:600">Starter</p>
+            <div class="flex items-end gap-1 mb-1">
+              <span class="font-heading text-4xl font-800 text-ink" style="font-family:Outfit,sans-serif;font-weight:800">$0</span>
+            </div>
+            <p class="text-muted text-sm mb-6">Free forever for small teams</p>
+            <a href="#" class="btn block text-center border-2 border-border hover:border-primary text-ink text-sm font-medium py-2.5 rounded-xl cursor-pointer transition-colors duration-150" style="font-family:Outfit,sans-serif">Get started</a>
+            <ul class="mt-6 space-y-3 text-sm text-muted">
+              <li class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#10B981" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Up to 5 members</li>
+              <li class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#10B981" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>3 active projects</li>
+              <li class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#10B981" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Basic board &amp; sprints</li>
+              <li class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#10B981" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>GitHub integration</li>
+            </ul>
+          </div>
+
+          <!-- Pro (highlighted) -->
+          <div class="pricing-card border-2 border-primary rounded-2xl p-7 bg-primary relative cursor-default">
+            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-cta text-white text-xs font-semibold px-3 py-1 rounded-full" style="font-family:Outfit,sans-serif">Most popular</div>
+            <p class="font-heading font-600 text-white text-sm uppercase tracking-wide mb-1" style="font-family:Outfit,sans-serif;font-weight:600">Pro</p>
+            <div class="flex items-end gap-1 mb-1">
+              <span class="font-heading text-4xl font-800 text-white" style="font-family:Outfit,sans-serif;font-weight:800">$12</span>
+              <span class="text-white/70 text-sm mb-1.5">/seat/mo</span>
+            </div>
+            <p class="text-white/70 text-sm mb-6">Everything your team needs</p>
+            <a href="#" class="btn block text-center bg-white hover:bg-bg text-primary text-sm font-semibold py-2.5 rounded-xl cursor-pointer" style="font-family:Outfit,sans-serif">Start free trial</a>
+            <ul class="mt-6 space-y-3 text-sm text-white/90">
+              <li class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited members</li>
+              <li class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited projects</li>
+              <li class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>AI sprint planning</li>
+              <li class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Automated standups</li>
+              <li class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Priority support</li>
+            </ul>
+          </div>
+
+          <!-- Enterprise -->
+          <div class="pricing-card border-2 border-border rounded-2xl p-7 bg-bg cursor-default">
+            <p class="font-heading font-600 text-ink text-sm uppercase tracking-wide mb-1" style="font-family:Outfit,sans-serif;font-weight:600">Enterprise</p>
+            <div class="flex items-end gap-1 mb-1">
+              <span class="font-heading text-4xl font-800 text-ink" style="font-family:Outfit,sans-serif;font-weight:800">Custom</span>
+            </div>
+            <p class="text-muted text-sm mb-6">For orgs that need more control</p>
+            <a href="#" class="btn block text-center border-2 border-border hover:border-primary text-ink text-sm font-medium py-2.5 rounded-xl cursor-pointer transition-colors duration-150" style="font-family:Outfit,sans-serif">Talk to sales</a>
+            <ul class="mt-6 space-y-3 text-sm text-muted">
+              <li class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#10B981" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Pro</li>
+              <li class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#10B981" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>SSO &amp; SAML</li>
+              <li class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#10B981" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Audit logs</li>
+              <li class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#10B981" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>Dedicated SLA</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="max-w-3xl mx-auto px-6 py-24 text-center">
+      <h2 class="font-heading text-4xl md:text-5xl font-800 text-ink mb-4" style="font-family:Outfit,sans-serif;font-weight:800">Ready to ship faster?</h2>
+      <p class="text-muted text-lg mb-10">Join 4,000+ teams that run their entire engineering workflow in Flowly.</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#" class="btn w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-cta hover:bg-cta-dark text-white font-semibold px-8 py-4 rounded-xl text-base cursor-pointer" style="font-family:Outfit,sans-serif">
+          Get started — it's free
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#" class="text-sm text-muted hover:text-ink transition-colors duration-150 cursor-pointer">No credit card required</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-border bg-white">
+    <div class="max-w-6xl mx-auto px-6 py-12">
+      <div class="flex flex-col md:flex-row justify-between gap-8 mb-10">
+        <div>
+          <a href="#" class="flex items-center gap-2 mb-3" aria-label="Flowly home">
+            <svg width="24" height="24" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect width="28" height="28" rx="8" fill="#6366F1"/><path d="M8 14h4l2-5 3 10 2-5h1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="font-heading font-700 text-ink" style="font-family:Outfit,sans-serif;font-weight:700">Flowly</span>
+          </a>
+          <p class="text-sm text-muted max-w-xs">Project management for teams that ship. Fast, focused, and built for developers.</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-8 text-sm">
+          <div>
+            <p class="font-semibold text-ink mb-3" style="font-family:Outfit,sans-serif">Product</p>
+            <ul class="space-y-2 text-muted">
+              <li><a href="#" class="hover:text-ink transition-colors duration-150 cursor-pointer">Features</a></li>
+              <li><a href="#" class="hover:text-ink transition-colors duration-150 cursor-pointer">Pricing</a></li>
+              <li><a href="#" class="hover:text-ink transition-colors duration-150 cursor-pointer">Changelog</a></li>
+              <li><a href="#" class="hover:text-ink transition-colors duration-150 cursor-pointer">Roadmap</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-semibold text-ink mb-3" style="font-family:Outfit,sans-serif">Company</p>
+            <ul class="space-y-2 text-muted">
+              <li><a href="#" class="hover:text-ink transition-colors duration-150 cursor-pointer">About</a></li>
+              <li><a href="#" class="hover:text-ink transition-colors duration-150 cursor-pointer">Blog</a></li>
+              <li><a href="#" class="hover:text-ink transition-colors duration-150 cursor-pointer">Careers</a></li>
+              <li><a href="#" class="hover:text-ink transition-colors duration-150 cursor-pointer">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-semibold text-ink mb-3" style="font-family:Outfit,sans-serif">Legal</p>
+            <ul class="space-y-2 text-muted">
+              <li><a href="#" class="hover:text-ink transition-colors duration-150 cursor-pointer">Privacy</a></li>
+              <li><a href="#" class="hover:text-ink transition-colors duration-150 cursor-pointer">Terms</a></li>
+              <li><a href="#" class="hover:text-ink transition-colors duration-150 cursor-pointer">Security</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-border pt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
+        <p class="text-xs text-muted">© 2026 Flowly, Inc. All rights reserved.</p>
+        <p class="text-xs text-muted">Made with ♥ for builders</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
