@@ -114,6 +114,7 @@ const styles = `
   .text-btn { background: none; border: none; color: var(--faint); font-size: 12px; font-family: 'JetBrains Mono', monospace; cursor: pointer; padding: 0; transition: color 0.18s; }
   .text-btn:hover { color: var(--text); }
   .msg { font-size: 12.5px; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
+  .msg-ok { font-size: 12.5px; color: #34d399; font-family: 'JetBrains Mono', monospace; }
 
   /* DASHBOARD */
   .dashboard-wrap { position: relative; z-index: 1; min-height: 100vh; }
@@ -706,25 +707,40 @@ function Login() {
   const signUp = async () => {
     if (!email || !password) return setMessage("enter your email and password")
     setLoading(true)
-    const { error } = await supabase.auth.signUp({ email, password })
+    const { data, error } = await supabase.auth.signUp({ email, password })
     setLoading(false)
-    if (error) setMessage(error.message)
-    else { setStep("otp"); setMessage("") }
+    if (error) return setMessage(error.message)
+    // If email confirmation is off, Supabase returns a session immediately
+    if (data?.session) return // onAuthStateChange in Main will pick this up
+    setStep("otp")
+    setMessage("")
   }
 
   const verifyOtp = async () => {
-    if (otp.length < 6) return setMessage("enter the 6-digit code from your email")
+    const code = otp.trim()
+    if (code.length < 6) return setMessage("enter the 6-digit code from your email")
     setLoading(true)
-    const { error } = await supabase.auth.verifyOtp({ email, token: otp, type: "signup" })
+    const { data, error } = await supabase.auth.verifyOtp({ email, token: code, type: "signup" })
     setLoading(false)
-    if (error) setMessage(error.message)
+    if (error) {
+      const msg = error.message.toLowerCase()
+      if (msg.includes("expired") || msg.includes("invalid") || msg.includes("not found"))
+        setMessage("code is wrong or expired — tap 'resend code' to get a new one")
+      else if (msg.includes("already confirmed"))
+        setMessage("email already verified — try logging in instead")
+      else
+        setMessage(error.message)
+      return
+    }
+    // Success — session fires onAuthStateChange in Main; show brief confirmation
+    setMessage("verified ✓")
   }
 
   const resendOtp = async () => {
     setLoading(true)
     const { error } = await supabase.auth.resend({ type: "signup", email })
     setLoading(false)
-    setMessage(error ? error.message : "code resent ✓")
+    setMessage(error ? error.message : "new code sent — check your inbox")
   }
 
   const logIn = async () => {
@@ -767,7 +783,9 @@ function Login() {
             onChange={e => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
             onKeyDown={e => e.key === "Enter" && verifyOtp()} />
           <p className="otp-hint">enter the code from the confirmation email</p>
-          {message && <p className="msg" style={{ textAlign: "center" }}>{message}</p>}
+          {message && (
+            <p className={message.includes("✓") ? "msg-ok" : "msg"} style={{ textAlign: "center" }}>{message}</p>
+          )}
           <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="btn-primary" onClick={verifyOtp} disabled={loading}>
             {loading ? "verifying…" : "verify email"}
           </motion.button>
